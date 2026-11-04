@@ -1,0 +1,155 @@
+import React, { useState } from "react";
+import { DashboardLayout } from "../../components/layout/DashboardLayout";
+import { Button } from "../../components/common/Button";
+import { Input } from "../../components/common/Input";
+import { Badge } from "../../components/common/Badge";
+import { useAuth } from "../../context/AuthContext";
+import { useNotifications } from "../../context/NotificationContext";
+import { authService } from "../../services/allServices";
+import { Building, ShieldCheck, Mail, Phone, Lock, FileText, CheckCircle2 } from "lucide-react";
+
+export const ProviderProfile = () => {
+  const { user, refreshUser } = useAuth();
+  const { addToast } = useNotifications();
+
+  const provider = user?.provider || {};
+  const [fullName, setFullName] = useState(user?.full_name || "");
+  const [phone, setPhone] = useState(user?.phone_number || "");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    setIsUpdating(true);
+    try {
+      await authService.updateProfile({
+        full_name: fullName,
+        phone_number: phone,
+      });
+      addToast("Profile details updated", "success");
+      await refreshUser();
+    } catch (err) {
+      addToast(err.response?.data?.message || "Failed to update profile", "error");
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handlePassword = async (e) => {
+    e.preventDefault();
+    if (newPassword.length < 8) {
+      addToast("New password must be at least 8 characters", "error");
+      return;
+    }
+    try {
+      await authService.changePassword({
+        current_password: currentPassword,
+        new_password: newPassword,
+      });
+      addToast("Password changed successfully", "success");
+      setCurrentPassword("");
+      setNewPassword("");
+    } catch (err) {
+      addToast(err.response?.data?.message || "Failed to change password", "error");
+    }
+  };
+
+  return (
+    <DashboardLayout
+      title="Business Profile & Compliance"
+      subtitle="View verification credentials, business identity documents, and security settings."
+    >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Verification Status Card */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+          <h3 className="font-bold text-sm text-slate-900 border-b border-slate-100 pb-3">
+            Marketplace Accreditation
+          </h3>
+
+          <div>
+            <span className="text-xs text-slate-500 block mb-1">Status</span>
+            <Badge status={provider.verification_status || "PENDING"} size="md" />
+          </div>
+
+          <div className="text-xs space-y-2 text-slate-600">
+            <div><strong>Registered Business:</strong> {provider.business_name}</div>
+            <div><strong>Years in Business:</strong> {provider.years_of_experience} Years</div>
+            <div><strong>Commission Rate:</strong> {provider.commission_rate || "10.00"}%</div>
+            <div><strong>Average Rating:</strong> {provider.average_rating || "0.00"} ★</div>
+          </div>
+
+          <div className="pt-2 border-t border-slate-100">
+            <span className="text-xs font-semibold text-slate-700 block mb-1">
+              Documents Submitted:
+            </span>
+            <span className="inline-flex items-center text-xs text-teal-600 font-medium">
+              <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Government Business ID & Trade License
+            </span>
+          </div>
+        </div>
+
+        {/* Contact details */}
+        <div className="md:col-span-2 space-y-6">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 className="font-bold text-sm text-slate-900 border-b border-slate-100 pb-3">
+              Representative Details
+            </h3>
+
+            <form onSubmit={handleUpdate} className="space-y-4">
+              <Input
+                label="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+              />
+              <Input
+                label="Email Address"
+                value={user?.email || ""}
+                disabled
+                helperText="Email is bound to the registered business entity."
+              />
+              <Input
+                label="Primary Phone Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+              <Button type="submit" variant="teal" size="sm" isLoading={isUpdating}>
+                Save Changes
+              </Button>
+            </form>
+          </div>
+
+          {/* Password update */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 className="font-bold text-sm text-slate-900 border-b border-slate-100 pb-3">
+              Security Credentials
+            </h3>
+            <form onSubmit={handlePassword} className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <Input
+                  label="Current Password"
+                  type="password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  required
+                />
+                <Input
+                  label="New Password"
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <Button type="submit" variant="primary" size="sm">
+                Update Password
+              </Button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  );
+};
