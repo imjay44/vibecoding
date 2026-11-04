@@ -77,3 +77,4 @@ During development and cloud deployment testing, real-world issues were identifi
 | **Deployment** | 10 | 10 | Render backend API, Netlify frontend SPA, multi-cloud zero-config adapters |
 | **Documentation & Presentation** | 10 | 10 | 10 markdown documentation manuals in `docs/`, OpenAPI schema, Postman collection |
 | **Total Marks** | **100** | **100** | **Comprehensive Full-Stack Production Deliverable** |
+

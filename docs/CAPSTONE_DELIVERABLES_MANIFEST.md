@@ -73,3 +73,4 @@ Below is the direct mapping of all required submission items as specified in **S
 | **9. Deployment** | 10 | **10 / 10** | Render Web Service + Netlify Frontend + Cloud Database |
 | **10. Documentation & Presentation** | 10 | **10 / 10** | 10 comprehensive guides in `docs/`, OpenAPI JSON, Postman Collection |
 | **Total Marks** | **100** | **100 / 100** | **Full Compliance Achieved** |
+

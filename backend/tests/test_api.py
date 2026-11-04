@@ -172,8 +172,9 @@ async def test_customer_booking_creation_and_invoice():
         services = svc_res.json()["data"]
         svc_id = services[0]["id"]
 
-        # Book service for tomorrow
-        target_date = (date.today() + timedelta(days=2)).isoformat()
+        # Book service for open upcoming date
+        import secrets
+        target_date = (date.today() + timedelta(days=15 + secrets.randbelow(50))).isoformat()
         booking_payload = {
             "provider_id": prov_id,
             "service_id": svc_id,

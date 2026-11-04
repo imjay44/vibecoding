@@ -508,7 +508,8 @@ Detailed architectural and operational documentation is stored inside the `/docs
 8. **[Postman API Collection (`docs/HomeServe_API.postman_collection.json`)](docs/HomeServe_API.postman_collection.json)**: Ready-to-import v2.1.0 Postman collection (79 requests).
 9. **[Security Checklist & Audit (`docs/SECURITY_CHECKLIST.md`)](docs/SECURITY_CHECKLIST.md)**: OWASP Top 10 mitigation verification matrix.
 10. **[Testing Report (`docs/TESTING_REPORT.md`)](docs/TESTING_REPORT.md)**: Automated backend and E2E browser test coverage matrices.
-11. **[Latest Deployment & QA Audit Report (`docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md`)](docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md)**: Full verification matrix of all 15 SaaS lifecycle stages, multi-cloud fixes, and zero-defect sign-off.
+11. **[End-to-End Application Testing Report (`docs/END_TO_END_TESTING_REPORT.md`)](docs/END_TO_END_TESTING_REPORT.md)**: Playwright Chromium browser tests, 15-stage SaaS lifecycle verification, and QA sign-off.
+12. **[Latest Deployment & QA Audit Report (`docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md`)](docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md)**: Full verification matrix of all 15 SaaS lifecycle stages, multi-cloud fixes, and zero-defect sign-off.
 12. **[Production Deployment Runbook (`docs/DEPLOYMENT_GUIDE.md`)](docs/DEPLOYMENT_GUIDE.md)**: Step-by-step Netlify, Render, and MySQL hosting instructions.
 13. **[AI Prompts & Vibe Coding Dev Log (`docs/AI_PROMPTS_AND_DEV_LOG.md`)](docs/AI_PROMPTS_AND_DEV_LOG.md)**: SDLC prompts, debugging log, and self-evaluation breakdown.
 14. **[Final Capstone Presentation (`docs/FINAL_CAPSTONE_PRESENTATION.md`)](docs/FINAL_CAPSTONE_PRESENTATION.md)**: 11-slide presentation guide for capstone submission.

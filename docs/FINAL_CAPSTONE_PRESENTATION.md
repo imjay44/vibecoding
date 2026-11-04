@@ -127,3 +127,4 @@ $$\longrightarrow \text{Sequential Tax Invoice Generation} \longrightarrow \text
 | **Deployment** | 10 | **10** | Render Web Service + Netlify SPA + Cloud Database |
 | **Documentation & Presentation** | 10 | **10** | 10 technical manuals, OpenAPI spec, Postman collection |
 | **Total Marks** | **100** | **100** | **Production-Ready Capstone Project Completed** |
+
