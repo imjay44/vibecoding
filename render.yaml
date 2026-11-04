@@ -11,7 +11,7 @@ services:
       - key: APP_NAME
         value: "HomeServe Technologies API"
       - key: DATABASE_URL
-        sync: false
+        value: sqlite:///./homeserve.db
       - key: SECRET_KEY
         generateValue: true
       - key: JWT_SECRET_KEY
@@ -23,13 +23,13 @@ services:
       - key: REFRESH_TOKEN_EXPIRE_DAYS
         value: "7"
       - key: CORS_ORIGINS
-        value: "https://homeserve-tech.netlify.app"
+        value: "*"
       - key: FRONTEND_URL
-        value: "https://homeserve-tech.netlify.app"
+        value: "*"
       - key: RAZORPAY_KEY_ID
-        sync: false
+        value: rzp_test_placeholder
       - key: RAZORPAY_KEY_SECRET
-        sync: false
+        value: sec_test_placeholder
       - key: RAZORPAY_WEBHOOK_SECRET
         sync: false
       - key: CLOUDINARY_CLOUD_NAME
