@@ -1,0 +1,1952 @@
+{
+  "info": {
+    "_postman_id": "c1f7a4d5-89b2-4d2c-8b8c-homeserve2026",
+    "name": "HomeServe Technologies - API Postman Collection",
+    "description": "Complete Postman collection for all 64 endpoints of HomeServe Technologies SaaS Platform across all 4 roles.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Endpoints",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Service health and readiness check."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication Endpoints",
+      "item": [
+        {
+          "name": "Register Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/register/customer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register",
+                "customer"
+              ]
+            },
+            "description": "Registers a new customer account."
+          }
+        },
+        {
+          "name": "Register Provider",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/register/provider",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register",
+                "provider"
+              ]
+            },
+            "description": "Registers a new service contractor (pending admin verification)."
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Authenticates credentials and returns JWT access & refresh tokens."
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            },
+            "description": "Exchanges a valid refresh token for a new access token."
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Revokes refresh token on session logout."
+          }
+        },
+        {
+          "name": "Get Current User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            },
+            "description": "Returns the authenticated user's detailed profile."
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "profile"
+              ]
+            },
+            "description": "Updates basic personal profile information."
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            },
+            "description": "Changes password for authenticated user."
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            },
+            "description": "Initiates password reset process."
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            },
+            "description": "Resets password using token."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Service categories Endpoints",
+      "item": [
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            },
+            "description": "Retrieves all active service categories."
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories"
+              ]
+            },
+            "description": "Creates a new service category (Admin only)."
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categories/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories",
+                "{id}"
+              ]
+            },
+            "description": "Updates category details (Admin only)."
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categories/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories",
+                "{id}"
+              ]
+            },
+            "description": "Deactivates a category (Admin only)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Services catalog Endpoints",
+      "item": [
+        {
+          "name": "List Services",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/services",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "services"
+              ]
+            },
+            "description": "Browses platform services with multi-field search and filters."
+          }
+        },
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/services",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "services"
+              ]
+            },
+            "description": "Creates a new service in the catalog (Admin only)."
+          }
+        },
+        {
+          "name": "Get Service",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/services/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "services",
+                "{id}"
+              ]
+            },
+            "description": "Retrieves full details for a single service."
+          }
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/services/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "services",
+                "{id}"
+              ]
+            },
+            "description": "Updates service details (Admin only)."
+          }
+        },
+        {
+          "name": "Delete Service",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/services/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "services",
+                "{id}"
+              ]
+            },
+            "description": "Deactivates a service (Admin only)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer portal Endpoints",
+      "item": [
+        {
+          "name": "Get Customer Addresses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/addresses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "addresses"
+              ]
+            },
+            "description": "Retrieves all addresses for the authenticated customer."
+          }
+        },
+        {
+          "name": "Create Customer Address",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/addresses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "addresses"
+              ]
+            },
+            "description": "Adds a new address to customer address book."
+          }
+        },
+        {
+          "name": "Update Customer Address",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/addresses/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "addresses",
+                "{id}"
+              ]
+            },
+            "description": "Updates an existing address."
+          }
+        },
+        {
+          "name": "Delete Customer Address",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/addresses/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "addresses",
+                "{id}"
+              ]
+            },
+            "description": "Deletes an address from the customer address book."
+          }
+        },
+        {
+          "name": "Get Favorites",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/favorites",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "favorites"
+              ]
+            },
+            "description": "Lists saved favorite providers for customer."
+          }
+        },
+        {
+          "name": "Toggle Favorite",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/favorites/{provider_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "favorites",
+                "{provider_id}"
+              ]
+            },
+            "description": "Toggles bookmark status for a service provider."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Service provider portal Endpoints",
+      "item": [
+        {
+          "name": "List Approved Providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers"
+              ]
+            },
+            "description": "Browses approved service providers with filters."
+          }
+        },
+        {
+          "name": "Get Provider Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "{id}"
+              ]
+            },
+            "description": "Retrieves full public profile for a specific provider."
+          }
+        },
+        {
+          "name": "Get My Services",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/services",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "services"
+              ]
+            },
+            "description": "Retrieves all services configured by the logged-in provider."
+          }
+        },
+        {
+          "name": "Add My Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/services",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "services"
+              ]
+            },
+            "description": "Configures a catalog service offering with custom price."
+          }
+        },
+        {
+          "name": "Update My Service",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/services/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "services",
+                "{id}"
+              ]
+            },
+            "description": "Updates custom pricing or availability for a provider service."
+          }
+        },
+        {
+          "name": "Delete My Service",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/services/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "services",
+                "{id}"
+              ]
+            },
+            "description": "Removes a service offering from provider."
+          }
+        },
+        {
+          "name": "Get My Availability",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "availability"
+              ]
+            },
+            "description": "Retrieves operational availability schedule."
+          }
+        },
+        {
+          "name": "Update My Availability",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "availability"
+              ]
+            },
+            "description": "Configures complete weekly availability schedule."
+          }
+        },
+        {
+          "name": "Get My Service Areas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/service-areas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "service-areas"
+              ]
+            },
+            "description": "Retrieves provider coverage areas."
+          }
+        },
+        {
+          "name": "Add My Service Area",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/service-areas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "service-areas"
+              ]
+            },
+            "description": "Adds a new operational city/pincode for the provider."
+          }
+        },
+        {
+          "name": "Delete My Service Area",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/service-areas/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "service-areas",
+                "{id}"
+              ]
+            },
+            "description": "Removes a service area."
+          }
+        },
+        {
+          "name": "Get My Technicians",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/technicians",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "technicians"
+              ]
+            },
+            "description": "Lists all technicians employed under the provider."
+          }
+        },
+        {
+          "name": "Create Technician Account",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/technicians",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "technicians"
+              ]
+            },
+            "description": "Creates a new technician employee account under the provider."
+          }
+        },
+        {
+          "name": "Get My Earnings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers/me/earnings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers",
+                "me",
+                "earnings"
+              ]
+            },
+            "description": "Retrieves financial ledger and earnings breakdown for provider."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Technician workforce Endpoints",
+      "item": [
+        {
+          "name": "Get Assigned Jobs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/technicians/jobs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "technicians",
+                "jobs"
+              ]
+            },
+            "description": "Retrieves all jobs assigned to the logged-in technician."
+          }
+        },
+        {
+          "name": "Get Assigned Job Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/technicians/jobs/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "technicians",
+                "jobs",
+                "{id}"
+              ]
+            },
+            "description": "Retrieves a single assigned job's details."
+          }
+        },
+        {
+          "name": "Accept Job",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/technicians/jobs/{id}/accept",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "technicians",
+                "jobs",
+                "{id}",
+                "accept"
+              ]
+            },
+            "description": "Technician accepts an assigned job."
+          }
+        },
+        {
+          "name": "Mark Job Arrival",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/technicians/jobs/{id}/arrive",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "technicians",
+                "jobs",
+                "{id}",
+                "arrive"
+              ]
+            },
+            "description": "Marks technician arrival at customer site and transitions status to IN_PROGRESS."
+          }
+        },
+        {
+          "name": "Complete Job",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/technicians/jobs/{id}/complete",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "technicians",
+                "jobs",
+                "{id}",
+                "complete"
+              ]
+            },
+            "description": "Marks work as completed and updates technician job count."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings lifecycle Endpoints",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings"
+              ]
+            },
+            "description": "Customer initiates a new booking with backend availability reservation."
+          }
+        },
+        {
+          "name": "List Bookings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings"
+              ]
+            },
+            "description": "Role-aware list of bookings."
+          }
+        },
+        {
+          "name": "Get Booking",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{id}"
+              ]
+            },
+            "description": "Retrieves single booking with RBAC ownership check."
+          }
+        },
+        {
+          "name": "Accept Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{id}/accept",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{id}",
+                "accept"
+              ]
+            },
+            "description": "Provider accepts incoming booking request."
+          }
+        },
+        {
+          "name": "Reject Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{id}/reject",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{id}",
+                "reject"
+              ]
+            },
+            "description": "Provider rejects booking request with reason."
+          }
+        },
+        {
+          "name": "Assign Technician",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{id}/assign-technician",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{id}",
+                "assign-technician"
+              ]
+            },
+            "description": "Provider assigns a technician to a confirmed booking."
+          }
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{id}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{id}",
+                "cancel"
+              ]
+            },
+            "description": "Customer or Admin cancels booking according to cancellation policy."
+          }
+        },
+        {
+          "name": "Add Booking Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{id}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{id}",
+                "images"
+              ]
+            },
+            "description": "Uploads verification photos (before/after work or customer reference)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments & gateway Endpoints",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/create-order",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "create-order"
+              ]
+            },
+            "description": "Creates a server-side Razorpay order in integer subunits."
+          }
+        },
+        {
+          "name": "Verify Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/verify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "verify"
+              ]
+            },
+            "description": "Verifies payment signature server-side and settles booking, invoice and provider earnings."
+          }
+        },
+        {
+          "name": "Razorpay Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/webhook",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "webhook"
+              ]
+            },
+            "description": "Asynchronous webhook handler for payment events with signature verification."
+          }
+        },
+        {
+          "name": "Get Payment History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/history",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "history"
+              ]
+            },
+            "description": "Retrieves payment history based on user role."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoices Endpoints",
+      "item": [
+        {
+          "name": "Get Invoice For Booking",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/{booking_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "invoices",
+                "{booking_id}"
+              ]
+            },
+            "description": "Retrieves tax invoice for a booking."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews & ratings Endpoints",
+      "item": [
+        {
+          "name": "Submit Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reviews",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reviews"
+              ]
+            },
+            "description": "Submits a customer rating (1-5) and review for a completed booking."
+          }
+        },
+        {
+          "name": "Get Provider Reviews",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/provider/{provider_id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reviews",
+                "provider",
+                "{provider_id}"
+              ]
+            },
+            "description": "Retrieves all reviews for a provider."
+          }
+        },
+        {
+          "name": "Reply To Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/{id}/reply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reviews",
+                "{id}",
+                "reply"
+              ]
+            },
+            "description": "Allows service provider to reply to customer feedback."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Complaints & disputes Endpoints",
+      "item": [
+        {
+          "name": "List Complaints",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/complaints",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "complaints"
+              ]
+            },
+            "description": "Retrieves tickets based on role."
+          }
+        },
+        {
+          "name": "Raise Complaint",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/complaints",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "complaints"
+              ]
+            },
+            "description": "Customer submits a formal dispute ticket regarding a booking."
+          }
+        },
+        {
+          "name": "Update Complaint Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/complaints/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "complaints",
+                "{id}"
+              ]
+            },
+            "description": "Administrator reviews and resolves dispute ticket."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Coupons & discounts Endpoints",
+      "item": [
+        {
+          "name": "Validate Coupon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/coupons/validate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coupons",
+                "validate"
+              ]
+            },
+            "description": "Checks coupon validity and calculates discounted order amount."
+          }
+        },
+        {
+          "name": "List Coupons",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/coupons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coupons"
+              ]
+            },
+            "description": "Retrieves all active coupons."
+          }
+        },
+        {
+          "name": "Create Coupon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/coupons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coupons"
+              ]
+            },
+            "description": "Creates a new promotional coupon (Admin only)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notification center Endpoints",
+      "item": [
+        {
+          "name": "Get User Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "Retrieves notifications for the authenticated user."
+          }
+        },
+        {
+          "name": "Mark Notification As Read",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/{id}/read",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "{id}",
+                "read"
+              ]
+            },
+            "description": "Marks a single notification as read."
+          }
+        },
+        {
+          "name": "Mark All Notifications As Read",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/read-all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "read-all"
+              ]
+            },
+            "description": "Marks all user notifications as read."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Super admin Endpoints",
+      "item": [
+        {
+          "name": "Get Admin Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/stats",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "stats"
+              ]
+            },
+            "description": "Calculates all key SaaS metrics directly from database."
+          }
+        },
+        {
+          "name": "Get Pending Providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/providers/pending",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "providers",
+                "pending"
+              ]
+            },
+            "description": "Lists newly registered service providers awaiting verification."
+          }
+        },
+        {
+          "name": "Verify Provider",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/providers/{id}/verify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "providers",
+                "{id}",
+                "verify"
+              ]
+            },
+            "description": "Approves or rejects a service provider onboarding request."
+          }
+        },
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ]
+            },
+            "description": "User directory management for Administrator."
+          }
+        },
+        {
+          "name": "Toggle User Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/{id}/toggle-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "{id}",
+                "toggle-status"
+              ]
+            },
+            "description": "Activates or deactivates any platform user account."
+          }
+        },
+        {
+          "name": "Export Bookings Csv",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/reports/bookings-csv",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "reports",
+                "bookings-csv"
+              ]
+            },
+            "description": "Exports structured bookings report in CSV format."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Platform analytics Endpoints",
+      "item": [
+        {
+          "name": "Get Analytics Charts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/analytics/charts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analytics",
+                "charts"
+              ]
+            },
+            "description": "Aggregates analytics dataset for Recharts interactive visualizations."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Media upload Endpoints",
+      "item": [
+        {
+          "name": "Upload Document Or Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "upload"
+              ]
+            },
+            "description": "Uploads file through backend to Cloudinary CDN or persistent storage."
+          }
+        }
+      ]
+    },
+    {
+      "name": "General Endpoints",
+      "item": [
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": []
+            },
+            "description": ""
+          }
+        }
+      ]
+    }
+  ]
+}

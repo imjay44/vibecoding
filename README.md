@@ -11,6 +11,8 @@
 
 **HomeServe Technologies** is an enterprise-grade, multi-role online marketplace SaaS platform connecting homeowners with vetted, insured, top-tier home service contractors and certified technicians. Designed from the ground up for resilience, speed, security, and responsive touch-first UX.
 
+> 🎓 **Capstone Submission Manifest**: See [Full Capstone Project Deliverables Manifest](docs/CAPSTONE_DELIVERABLES_MANIFEST.md) for the complete 100-mark evaluation matrix, mapping all 10 modules, 9 development phases, test suites, live URLs, and deliverables.
+
 ---
 
 ## 📑 Table of Contents
@@ -496,15 +498,20 @@ FastAPI automatically generates live, interactive documentation:
 
 Detailed architectural and operational documentation is stored inside the `/docs` directory:
 
-1. **[Requirements Specification (`docs/REQUIREMENTS.md`)](docs/REQUIREMENTS.md)**: Exhaustive breakdown of features, actors, and functional scopes.
-2. **[System Architecture (`docs/ARCHITECTURE.md`)](docs/ARCHITECTURE.md)**: Component diagrams, lifecycle state machines, and concurrency controls.
-3. **[Database Schema Dictionary (`docs/DATABASE_SCHEMA.md`)](docs/DATABASE_SCHEMA.md)**: 23 relational database tables, columns, constraints, and indexes.
-4. **[Entity-Relationship Diagram (`docs/ER_DIAGRAM.md`)](docs/ER_DIAGRAM.md)**: Comprehensive Mermaid ER diagram and foreign key mapping.
-5. **[REST API Specifications (`docs/API_DOCUMENTATION.md`)](docs/API_DOCUMENTATION.md)**: Complete endpoint contract listing request/response payloads.
-6. **[Security Checklist & Audit (`docs/SECURITY_CHECKLIST.md`)](docs/SECURITY_CHECKLIST.md)**: OWASP Top 10 mitigation verification matrix.
-7. **[Testing Report (`docs/TESTING_REPORT.md`)](docs/TESTING_REPORT.md)**: Automated backend and E2E browser test coverage matrices.
-8. **[Production Deployment Runbook (`docs/DEPLOYMENT_GUIDE.md`)](docs/DEPLOYMENT_GUIDE.md)**: Step-by-step Netlify, Render, and MySQL hosting instructions.
-9. **[Latest Deployment & QA Audit Report (`docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md`)](docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md)**: Full verification matrix of all 15 SaaS lifecycle stages, multi-cloud fixes, and zero-defect sign-off.
+1. **[Capstone Deliverables Manifest (`docs/CAPSTONE_DELIVERABLES_MANIFEST.md`)](docs/CAPSTONE_DELIVERABLES_MANIFEST.md)**: Master evaluation rubric and deliverables matrix.
+2. **[Requirements Specification (`docs/REQUIREMENTS.md`)](docs/REQUIREMENTS.md)**: Exhaustive breakdown of features, actors, and functional scopes.
+3. **[User Stories & Business Workflows (`docs/USER_STORIES_AND_WORKFLOWS.md`)](docs/USER_STORIES_AND_WORKFLOWS.md)**: User stories matrix, sequence diagrams, and SDLC Gantt chart.
+4. **[System Architecture (`docs/ARCHITECTURE.md`)](docs/ARCHITECTURE.md)**: Component diagrams, lifecycle state machines, and concurrency controls.
+5. **[Database Schema Dictionary (`docs/DATABASE_SCHEMA.md`)](docs/DATABASE_SCHEMA.md)**: 23 relational database tables, columns, constraints, and indexes.
+6. **[Entity-Relationship Diagram (`docs/ER_DIAGRAM.md`)](docs/ER_DIAGRAM.md)**: Comprehensive Mermaid ER diagram and foreign key mapping.
+7. **[REST API Specifications (`docs/API_DOCUMENTATION.md`)](docs/API_DOCUMENTATION.md)**: Complete endpoint contract listing request/response payloads.
+8. **[Postman API Collection (`docs/HomeServe_API.postman_collection.json`)](docs/HomeServe_API.postman_collection.json)**: Ready-to-import v2.1.0 Postman collection (79 requests).
+9. **[Security Checklist & Audit (`docs/SECURITY_CHECKLIST.md`)](docs/SECURITY_CHECKLIST.md)**: OWASP Top 10 mitigation verification matrix.
+10. **[Testing Report (`docs/TESTING_REPORT.md`)](docs/TESTING_REPORT.md)**: Automated backend and E2E browser test coverage matrices.
+11. **[Latest Deployment & QA Audit Report (`docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md`)](docs/LATEST_DEPLOYMENT_AND_TESTING_REPORT.md)**: Full verification matrix of all 15 SaaS lifecycle stages, multi-cloud fixes, and zero-defect sign-off.
+12. **[Production Deployment Runbook (`docs/DEPLOYMENT_GUIDE.md`)](docs/DEPLOYMENT_GUIDE.md)**: Step-by-step Netlify, Render, and MySQL hosting instructions.
+13. **[AI Prompts & Vibe Coding Dev Log (`docs/AI_PROMPTS_AND_DEV_LOG.md`)](docs/AI_PROMPTS_AND_DEV_LOG.md)**: SDLC prompts, debugging log, and self-evaluation breakdown.
+14. **[Final Capstone Presentation (`docs/FINAL_CAPSTONE_PRESENTATION.md`)](docs/FINAL_CAPSTONE_PRESENTATION.md)**: 11-slide presentation guide for capstone submission.
 
 ---
 

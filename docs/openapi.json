@@ -1,0 +1,7353 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "HomeServe Technologies API",
+    "description": "Enterprise Multi-Role Home Services Booking Platform API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Check",
+        "description": "Service health and readiness check.",
+        "operationId": "health_check_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register/customer": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register Customer",
+        "description": "Registers a new customer account.",
+        "operationId": "register_customer_api_v1_auth_register_customer_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_UserResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register/provider": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register Provider",
+        "description": "Registers a new service contractor (pending admin verification).",
+        "operationId": "register_provider_api_v1_auth_register_provider_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_UserResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "Authenticates credentials and returns JWT access & refresh tokens.",
+        "operationId": "login_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_TokenResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh Token",
+        "description": "Exchanges a valid refresh token for a new access token.",
+        "operationId": "refresh_token_api_v1_auth_refresh_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_TokenResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "Revokes refresh token on session logout.",
+        "operationId": "logout_api_v1_auth_logout_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get Current User Profile",
+        "description": "Returns the authenticated user's detailed profile.",
+        "operationId": "get_current_user_profile_api_v1_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/profile": {
+      "put": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Update Profile",
+        "description": "Updates basic personal profile information.",
+        "operationId": "update_profile_api_v1_auth_profile_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserProfileUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_UserResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/change-password": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Change Password",
+        "description": "Changes password for authenticated user.",
+        "operationId": "change_password_api_v1_auth_change_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/forgot-password": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Forgot Password",
+        "description": "Initiates password reset process.",
+        "operationId": "forgot_password_api_v1_auth_forgot_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/reset-password": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Reset Password",
+        "description": "Resets password using token.",
+        "operationId": "reset_password_api_v1_auth_reset_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/categories": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "summary": "List Categories",
+        "description": "Retrieves all active service categories.",
+        "operationId": "list_categories_api_v1_categories_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_CategoryResponse__"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Service Categories"
+        ],
+        "summary": "Create Category",
+        "description": "Creates a new service category (Admin only).",
+        "operationId": "create_category_api_v1_categories_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_CategoryResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/categories/{id}": {
+      "put": {
+        "tags": [
+          "Service Categories"
+        ],
+        "summary": "Update Category",
+        "description": "Updates category details (Admin only).",
+        "operationId": "update_category_api_v1_categories__id__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_CategoryResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Service Categories"
+        ],
+        "summary": "Delete Category",
+        "description": "Deactivates a category (Admin only).",
+        "operationId": "delete_category_api_v1_categories__id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/services": {
+      "get": {
+        "tags": [
+          "Services Catalog"
+        ],
+        "summary": "List Services",
+        "description": "Browses platform services with multi-field search and filters.",
+        "operationId": "list_services_api_v1_services_get",
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Category Id"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Min Price"
+            }
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Max Price"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ServiceResponse__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Services Catalog"
+        ],
+        "summary": "Create Service",
+        "description": "Creates a new service in the catalog (Admin only).",
+        "operationId": "create_service_api_v1_services_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ServiceResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/services/{id}": {
+      "get": {
+        "tags": [
+          "Services Catalog"
+        ],
+        "summary": "Get Service",
+        "description": "Retrieves full details for a single service.",
+        "operationId": "get_service_api_v1_services__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ServiceResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Services Catalog"
+        ],
+        "summary": "Update Service",
+        "description": "Updates service details (Admin only).",
+        "operationId": "update_service_api_v1_services__id__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ServiceResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Services Catalog"
+        ],
+        "summary": "Delete Service",
+        "description": "Deactivates a service (Admin only).",
+        "operationId": "delete_service_api_v1_services__id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/customers/addresses": {
+      "get": {
+        "tags": [
+          "Customer Portal"
+        ],
+        "summary": "Get Customer Addresses",
+        "description": "Retrieves all addresses for the authenticated customer.",
+        "operationId": "get_customer_addresses_api_v1_customers_addresses_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_AddressResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Customer Portal"
+        ],
+        "summary": "Create Customer Address",
+        "description": "Adds a new address to customer address book.",
+        "operationId": "create_customer_address_api_v1_customers_addresses_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_AddressResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/customers/addresses/{id}": {
+      "put": {
+        "tags": [
+          "Customer Portal"
+        ],
+        "summary": "Update Customer Address",
+        "description": "Updates an existing address.",
+        "operationId": "update_customer_address_api_v1_customers_addresses__id__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_AddressResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customer Portal"
+        ],
+        "summary": "Delete Customer Address",
+        "description": "Deletes an address from the customer address book.",
+        "operationId": "delete_customer_address_api_v1_customers_addresses__id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/customers/favorites": {
+      "get": {
+        "tags": [
+          "Customer Portal"
+        ],
+        "summary": "Get Favorites",
+        "description": "Lists saved favorite providers for customer.",
+        "operationId": "get_favorites_api_v1_customers_favorites_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ServiceProviderResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/customers/favorites/{provider_id}": {
+      "post": {
+        "tags": [
+          "Customer Portal"
+        ],
+        "summary": "Toggle Favorite",
+        "description": "Toggles bookmark status for a service provider.",
+        "operationId": "toggle_favorite_api_v1_customers_favorites__provider_id__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "provider_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Provider Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/providers": {
+      "get": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "List Approved Providers",
+        "description": "Browses approved service providers with filters.",
+        "operationId": "list_approved_providers_api_v1_providers_get",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "City"
+            }
+          },
+          {
+            "name": "service_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Service Id"
+            }
+          },
+          {
+            "name": "min_rating",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Min Rating"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ServiceProviderResponse__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/providers/{id}": {
+      "get": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Get Provider Details",
+        "description": "Retrieves full public profile for a specific provider.",
+        "operationId": "get_provider_details_api_v1_providers__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ServiceProviderResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/providers/me/services": {
+      "get": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Get My Services",
+        "description": "Retrieves all services configured by the logged-in provider.",
+        "operationId": "get_my_services_api_v1_providers_me_services_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ProviderServiceResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Add My Service",
+        "description": "Configures a catalog service offering with custom price.",
+        "operationId": "add_my_service_api_v1_providers_me_services_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderServiceCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ProviderServiceResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/providers/me/services/{id}": {
+      "put": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Update My Service",
+        "description": "Updates custom pricing or availability for a provider service.",
+        "operationId": "update_my_service_api_v1_providers_me_services__id__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderServiceUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ProviderServiceResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Delete My Service",
+        "description": "Removes a service offering from provider.",
+        "operationId": "delete_my_service_api_v1_providers_me_services__id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/providers/me/availability": {
+      "get": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Get My Availability",
+        "description": "Retrieves operational availability schedule.",
+        "operationId": "get_my_availability_api_v1_providers_me_availability_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_AvailabilitySlotResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Update My Availability",
+        "description": "Configures complete weekly availability schedule.",
+        "operationId": "update_my_availability_api_v1_providers_me_availability_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/AvailabilitySlotCreate"
+                },
+                "type": "array",
+                "title": "Slots Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_AvailabilitySlotResponse__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/providers/me/service-areas": {
+      "get": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Get My Service Areas",
+        "description": "Retrieves provider coverage areas.",
+        "operationId": "get_my_service_areas_api_v1_providers_me_service_areas_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ServiceAreaResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Add My Service Area",
+        "description": "Adds a new operational city/pincode for the provider.",
+        "operationId": "add_my_service_area_api_v1_providers_me_service_areas_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceAreaCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ServiceAreaResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/providers/me/service-areas/{id}": {
+      "delete": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Delete My Service Area",
+        "description": "Removes a service area.",
+        "operationId": "delete_my_service_area_api_v1_providers_me_service_areas__id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/providers/me/technicians": {
+      "get": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Get My Technicians",
+        "description": "Lists all technicians employed under the provider.",
+        "operationId": "get_my_technicians_api_v1_providers_me_technicians_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_TechnicianResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Create Technician Account",
+        "description": "Creates a new technician employee account under the provider.",
+        "operationId": "create_technician_account_api_v1_providers_me_technicians_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TechnicianCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_TechnicianResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/providers/me/earnings": {
+      "get": {
+        "tags": [
+          "Service Provider Portal"
+        ],
+        "summary": "Get My Earnings",
+        "description": "Retrieves financial ledger and earnings breakdown for provider.",
+        "operationId": "get_my_earnings_api_v1_providers_me_earnings_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ProviderEarningResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/technicians/jobs": {
+      "get": {
+        "tags": [
+          "Technician Workforce"
+        ],
+        "summary": "Get Assigned Jobs",
+        "description": "Retrieves all jobs assigned to the logged-in technician.",
+        "operationId": "get_assigned_jobs_api_v1_technicians_jobs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_BookingResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/technicians/jobs/{id}": {
+      "get": {
+        "tags": [
+          "Technician Workforce"
+        ],
+        "summary": "Get Assigned Job Detail",
+        "description": "Retrieves a single assigned job's details.",
+        "operationId": "get_assigned_job_detail_api_v1_technicians_jobs__id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/technicians/jobs/{id}/accept": {
+      "patch": {
+        "tags": [
+          "Technician Workforce"
+        ],
+        "summary": "Accept Job",
+        "description": "Technician accepts an assigned job.",
+        "operationId": "accept_job_api_v1_technicians_jobs__id__accept_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/technicians/jobs/{id}/arrive": {
+      "patch": {
+        "tags": [
+          "Technician Workforce"
+        ],
+        "summary": "Mark Job Arrival",
+        "description": "Marks technician arrival at customer site and transitions status to IN_PROGRESS.",
+        "operationId": "mark_job_arrival_api_v1_technicians_jobs__id__arrive_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/technicians/jobs/{id}/complete": {
+      "patch": {
+        "tags": [
+          "Technician Workforce"
+        ],
+        "summary": "Complete Job",
+        "description": "Marks work as completed and updates technician job count.",
+        "operationId": "complete_job_api_v1_technicians_jobs__id__complete_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_complete_job_api_v1_technicians_jobs__id__complete_patch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings": {
+      "post": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "Create Booking",
+        "description": "Customer initiates a new booking with backend availability reservation.",
+        "operationId": "create_booking_api_v1_bookings_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "List Bookings",
+        "description": "Role-aware list of bookings.",
+        "operationId": "list_bookings_api_v1_bookings_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_BookingResponse__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{id}": {
+      "get": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "Get Booking",
+        "description": "Retrieves single booking with RBAC ownership check.",
+        "operationId": "get_booking_api_v1_bookings__id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{id}/accept": {
+      "patch": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "Accept Booking",
+        "description": "Provider accepts incoming booking request.",
+        "operationId": "accept_booking_api_v1_bookings__id__accept_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{id}/reject": {
+      "patch": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "Reject Booking",
+        "description": "Provider rejects booking request with reason.",
+        "operationId": "reject_booking_api_v1_bookings__id__reject_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{id}/assign-technician": {
+      "post": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "Assign Technician",
+        "description": "Provider assigns a technician to a confirmed booking.",
+        "operationId": "assign_technician_api_v1_bookings__id__assign_technician_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TechnicianAssignRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{id}/cancel": {
+      "patch": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "Cancel Booking",
+        "description": "Customer or Admin cancels booking according to cancellation policy.",
+        "operationId": "cancel_booking_api_v1_bookings__id__cancel_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{id}/images": {
+      "post": {
+        "tags": [
+          "Bookings Lifecycle"
+        ],
+        "summary": "Add Booking Image",
+        "description": "Uploads verification photos (before/after work or customer reference).",
+        "operationId": "add_booking_image_api_v1_bookings__id__images_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_add_booking_image_api_v1_bookings__id__images_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_BookingImageResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payments/create-order": {
+      "post": {
+        "tags": [
+          "Payments & Gateway"
+        ],
+        "summary": "Create Order",
+        "description": "Creates a server-side Razorpay order in integer subunits.",
+        "operationId": "create_order_api_v1_payments_create_order_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_CreateOrderResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/payments/verify": {
+      "post": {
+        "tags": [
+          "Payments & Gateway"
+        ],
+        "summary": "Verify Payment",
+        "description": "Verifies payment signature server-side and settles booking, invoice and provider earnings.",
+        "operationId": "verify_payment_api_v1_payments_verify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_PaymentResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/payments/webhook": {
+      "post": {
+        "tags": [
+          "Payments & Gateway"
+        ],
+        "summary": "Razorpay Webhook",
+        "description": "Asynchronous webhook handler for payment events with signature verification.",
+        "operationId": "razorpay_webhook_api_v1_payments_webhook_post",
+        "parameters": [
+          {
+            "name": "x-razorpay-signature",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "X-Razorpay-Signature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payments/history": {
+      "get": {
+        "tags": [
+          "Payments & Gateway"
+        ],
+        "summary": "Get Payment History",
+        "description": "Retrieves payment history based on user role.",
+        "operationId": "get_payment_history_api_v1_payments_history_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_PaymentResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/invoices/{booking_id}": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "summary": "Get Invoice For Booking",
+        "description": "Retrieves tax invoice for a booking.",
+        "operationId": "get_invoice_for_booking_api_v1_invoices__booking_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "booking_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Booking Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_InvoiceResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reviews": {
+      "post": {
+        "tags": [
+          "Reviews & Ratings"
+        ],
+        "summary": "Submit Review",
+        "description": "Submits a customer rating (1-5) and review for a completed booking.",
+        "operationId": "submit_review_api_v1_reviews_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ReviewResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/reviews/provider/{provider_id}": {
+      "get": {
+        "tags": [
+          "Reviews & Ratings"
+        ],
+        "summary": "Get Provider Reviews",
+        "description": "Retrieves all reviews for a provider.",
+        "operationId": "get_provider_reviews_api_v1_reviews_provider__provider_id__get",
+        "parameters": [
+          {
+            "name": "provider_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Provider Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ReviewResponse__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reviews/{id}/reply": {
+      "post": {
+        "tags": [
+          "Reviews & Ratings"
+        ],
+        "summary": "Reply To Review",
+        "description": "Allows service provider to reply to customer feedback.",
+        "operationId": "reply_to_review_api_v1_reviews__id__reply_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewReplyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ReviewResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/complaints": {
+      "get": {
+        "tags": [
+          "Complaints & Disputes"
+        ],
+        "summary": "List Complaints",
+        "description": "Retrieves tickets based on role.",
+        "operationId": "list_complaints_api_v1_complaints_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ComplaintResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Complaints & Disputes"
+        ],
+        "summary": "Raise Complaint",
+        "description": "Customer submits a formal dispute ticket regarding a booking.",
+        "operationId": "raise_complaint_api_v1_complaints_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplaintCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ComplaintResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/complaints/{id}": {
+      "patch": {
+        "tags": [
+          "Complaints & Disputes"
+        ],
+        "summary": "Update Complaint Status",
+        "description": "Administrator reviews and resolves dispute ticket.",
+        "operationId": "update_complaint_status_api_v1_complaints__id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplaintStatusUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ComplaintResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/coupons/validate": {
+      "post": {
+        "tags": [
+          "Coupons & Discounts"
+        ],
+        "summary": "Validate Coupon",
+        "description": "Checks coupon validity and calculates discounted order amount.",
+        "operationId": "validate_coupon_api_v1_coupons_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CouponValidateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_CouponValidateResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/coupons": {
+      "get": {
+        "tags": [
+          "Coupons & Discounts"
+        ],
+        "summary": "List Coupons",
+        "description": "Retrieves all active coupons.",
+        "operationId": "list_coupons_api_v1_coupons_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_CouponResponse__"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Coupons & Discounts"
+        ],
+        "summary": "Create Coupon",
+        "description": "Creates a new promotional coupon (Admin only).",
+        "operationId": "create_coupon_api_v1_coupons_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CouponCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_CouponResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/notifications": {
+      "get": {
+        "tags": [
+          "Notification Center"
+        ],
+        "summary": "Get User Notifications",
+        "description": "Retrieves notifications for the authenticated user.",
+        "operationId": "get_user_notifications_api_v1_notifications_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_NotificationResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/notifications/{id}/read": {
+      "patch": {
+        "tags": [
+          "Notification Center"
+        ],
+        "summary": "Mark Notification As Read",
+        "description": "Marks a single notification as read.",
+        "operationId": "mark_notification_as_read_api_v1_notifications__id__read_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/read-all": {
+      "post": {
+        "tags": [
+          "Notification Center"
+        ],
+        "summary": "Mark All Notifications As Read",
+        "description": "Marks all user notifications as read.",
+        "operationId": "mark_all_notifications_as_read_api_v1_notifications_read_all_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/stats": {
+      "get": {
+        "tags": [
+          "Super Admin"
+        ],
+        "summary": "Get Admin Dashboard Stats",
+        "description": "Calculates all key SaaS metrics directly from database.",
+        "operationId": "get_admin_dashboard_stats_api_v1_admin_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_AdminStatsResponse_"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/providers/pending": {
+      "get": {
+        "tags": [
+          "Super Admin"
+        ],
+        "summary": "Get Pending Providers",
+        "description": "Lists newly registered service providers awaiting verification.",
+        "operationId": "get_pending_providers_api_v1_admin_providers_pending_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_ServiceProviderResponse__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/providers/{id}/verify": {
+      "patch": {
+        "tags": [
+          "Super Admin"
+        ],
+        "summary": "Verify Provider",
+        "description": "Approves or rejects a service provider onboarding request.",
+        "operationId": "verify_provider_api_v1_admin_providers__id__verify_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderVerifyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ServiceProviderResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users": {
+      "get": {
+        "tags": [
+          "Super Admin"
+        ],
+        "summary": "List Users",
+        "description": "User directory management for Administrator.",
+        "operationId": "list_users_api_v1_admin_users_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "role",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Role"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_List_UserResponse__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users/{id}/toggle-status": {
+      "patch": {
+        "tags": [
+          "Super Admin"
+        ],
+        "summary": "Toggle User Status",
+        "description": "Activates or deactivates any platform user account.",
+        "operationId": "toggle_user_status_api_v1_admin_users__id__toggle_status_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_UserResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/reports/bookings-csv": {
+      "get": {
+        "tags": [
+          "Super Admin"
+        ],
+        "summary": "Export Bookings Csv",
+        "description": "Exports structured bookings report in CSV format.",
+        "operationId": "export_bookings_csv_api_v1_admin_reports_bookings_csv_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/analytics/charts": {
+      "get": {
+        "tags": [
+          "Platform Analytics"
+        ],
+        "summary": "Get Analytics Charts",
+        "description": "Aggregates analytics dataset for Recharts interactive visualizations.",
+        "operationId": "get_analytics_charts_api_v1_analytics_charts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_Dict_str__Any__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/upload": {
+      "post": {
+        "tags": [
+          "Media Upload"
+        ],
+        "summary": "Upload Document Or Image",
+        "description": "Uploads file through backend to Cloudinary CDN or persistent storage.",
+        "operationId": "upload_document_or_image_api_v1_upload_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_document_or_image_api_v1_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "APIResponse_AddressResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AddressResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[AddressResponse]"
+      },
+      "APIResponse_AdminStatsResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdminStatsResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[AdminStatsResponse]"
+      },
+      "APIResponse_BookingImageResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BookingImageResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[BookingImageResponse]"
+      },
+      "APIResponse_BookingResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BookingResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[BookingResponse]"
+      },
+      "APIResponse_CategoryResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CategoryResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[CategoryResponse]"
+      },
+      "APIResponse_ComplaintResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ComplaintResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[ComplaintResponse]"
+      },
+      "APIResponse_CouponResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CouponResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[CouponResponse]"
+      },
+      "APIResponse_CouponValidateResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CouponValidateResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[CouponValidateResponse]"
+      },
+      "APIResponse_CreateOrderResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreateOrderResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[CreateOrderResponse]"
+      },
+      "APIResponse_Dict_str__Any__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[Dict[str, Any]]"
+      },
+      "APIResponse_InvoiceResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[InvoiceResponse]"
+      },
+      "APIResponse_List_AddressResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/AddressResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[AddressResponse]]"
+      },
+      "APIResponse_List_AvailabilitySlotResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/AvailabilitySlotResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[AvailabilitySlotResponse]]"
+      },
+      "APIResponse_List_BookingResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/BookingResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[BookingResponse]]"
+      },
+      "APIResponse_List_CategoryResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CategoryResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[CategoryResponse]]"
+      },
+      "APIResponse_List_ComplaintResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ComplaintResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[ComplaintResponse]]"
+      },
+      "APIResponse_List_CouponResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CouponResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[CouponResponse]]"
+      },
+      "APIResponse_List_NotificationResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/NotificationResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[NotificationResponse]]"
+      },
+      "APIResponse_List_PaymentResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[PaymentResponse]]"
+      },
+      "APIResponse_List_ProviderEarningResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ProviderEarningResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[ProviderEarningResponse]]"
+      },
+      "APIResponse_List_ProviderServiceResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ProviderServiceResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[ProviderServiceResponse]]"
+      },
+      "APIResponse_List_ReviewResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ReviewResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[ReviewResponse]]"
+      },
+      "APIResponse_List_ServiceAreaResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ServiceAreaResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[ServiceAreaResponse]]"
+      },
+      "APIResponse_List_ServiceProviderResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ServiceProviderResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[ServiceProviderResponse]]"
+      },
+      "APIResponse_List_ServiceResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ServiceResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[ServiceResponse]]"
+      },
+      "APIResponse_List_TechnicianResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/TechnicianResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[TechnicianResponse]]"
+      },
+      "APIResponse_List_UserResponse__": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/UserResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[List[UserResponse]]"
+      },
+      "APIResponse_PaymentResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaymentResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[PaymentResponse]"
+      },
+      "APIResponse_ProviderServiceResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProviderServiceResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[ProviderServiceResponse]"
+      },
+      "APIResponse_ReviewResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReviewResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[ReviewResponse]"
+      },
+      "APIResponse_ServiceAreaResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServiceAreaResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[ServiceAreaResponse]"
+      },
+      "APIResponse_ServiceProviderResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServiceProviderResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[ServiceProviderResponse]"
+      },
+      "APIResponse_ServiceResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServiceResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[ServiceResponse]"
+      },
+      "APIResponse_TechnicianResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TechnicianResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[TechnicianResponse]"
+      },
+      "APIResponse_TokenResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TokenResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[TokenResponse]"
+      },
+      "APIResponse_UserResponse_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[UserResponse]"
+      },
+      "APIResponse_dict_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[dict]"
+      },
+      "AddressCreate": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "Title",
+            "default": "Home"
+          },
+          "address_line1": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 3,
+            "title": "Address Line1"
+          },
+          "address_line2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Line2"
+          },
+          "landmark": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Landmark"
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "City"
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "State"
+          },
+          "pincode": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 4,
+            "title": "Pincode"
+          },
+          "latitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latitude"
+          },
+          "longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Longitude"
+          },
+          "is_default": {
+            "type": "boolean",
+            "title": "Is Default",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "address_line1",
+          "city",
+          "state",
+          "pincode"
+        ],
+        "title": "AddressCreate"
+      },
+      "AddressResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "customer_id": {
+            "type": "string",
+            "title": "Customer Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "address_line1": {
+            "type": "string",
+            "title": "Address Line1"
+          },
+          "address_line2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Line2"
+          },
+          "landmark": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Landmark"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "state": {
+            "type": "string",
+            "title": "State"
+          },
+          "pincode": {
+            "type": "string",
+            "title": "Pincode"
+          },
+          "latitude": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latitude"
+          },
+          "longitude": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Longitude"
+          },
+          "is_default": {
+            "type": "boolean",
+            "title": "Is Default"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "customer_id",
+          "title",
+          "address_line1",
+          "city",
+          "state",
+          "pincode",
+          "is_default",
+          "created_at"
+        ],
+        "title": "AddressResponse"
+      },
+      "AddressUpdate": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "address_line1": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Line1"
+          },
+          "address_line2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Line2"
+          },
+          "landmark": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Landmark"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "pincode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pincode"
+          },
+          "is_default": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Default"
+          }
+        },
+        "type": "object",
+        "title": "AddressUpdate"
+      },
+      "AdminStatsResponse": {
+        "properties": {
+          "total_customers": {
+            "type": "integer",
+            "title": "Total Customers"
+          },
+          "total_providers": {
+            "type": "integer",
+            "title": "Total Providers"
+          },
+          "total_technicians": {
+            "type": "integer",
+            "title": "Total Technicians"
+          },
+          "total_bookings": {
+            "type": "integer",
+            "title": "Total Bookings"
+          },
+          "pending_bookings": {
+            "type": "integer",
+            "title": "Pending Bookings"
+          },
+          "confirmed_bookings": {
+            "type": "integer",
+            "title": "Confirmed Bookings"
+          },
+          "completed_bookings": {
+            "type": "integer",
+            "title": "Completed Bookings"
+          },
+          "cancelled_bookings": {
+            "type": "integer",
+            "title": "Cancelled Bookings"
+          },
+          "total_revenue": {
+            "type": "string",
+            "title": "Total Revenue"
+          },
+          "platform_commission": {
+            "type": "string",
+            "title": "Platform Commission"
+          },
+          "provider_earnings": {
+            "type": "string",
+            "title": "Provider Earnings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total_customers",
+          "total_providers",
+          "total_technicians",
+          "total_bookings",
+          "pending_bookings",
+          "confirmed_bookings",
+          "completed_bookings",
+          "cancelled_bookings",
+          "total_revenue",
+          "platform_commission",
+          "provider_earnings"
+        ],
+        "title": "AdminStatsResponse"
+      },
+      "AvailabilitySlotCreate": {
+        "properties": {
+          "day_of_week": {
+            "type": "integer",
+            "maximum": 6.0,
+            "minimum": 0.0,
+            "title": "Day Of Week"
+          },
+          "start_time": {
+            "type": "string",
+            "title": "Start Time"
+          },
+          "end_time": {
+            "type": "string",
+            "title": "End Time"
+          },
+          "slot_capacity": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Slot Capacity",
+            "default": 1
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "day_of_week",
+          "start_time",
+          "end_time"
+        ],
+        "title": "AvailabilitySlotCreate"
+      },
+      "AvailabilitySlotResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "day_of_week": {
+            "type": "integer",
+            "title": "Day Of Week"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "time",
+            "title": "Start Time"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "time",
+            "title": "End Time"
+          },
+          "slot_capacity": {
+            "type": "integer",
+            "title": "Slot Capacity"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "provider_id",
+          "day_of_week",
+          "start_time",
+          "end_time",
+          "slot_capacity",
+          "is_active"
+        ],
+        "title": "AvailabilitySlotResponse"
+      },
+      "Body_add_booking_image_api_v1_bookings__id__images_post": {
+        "properties": {
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          },
+          "image_type": {
+            "type": "string",
+            "title": "Image Type",
+            "default": "AFTER_WORK"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_url"
+        ],
+        "title": "Body_add_booking_image_api_v1_bookings__id__images_post"
+      },
+      "Body_complete_job_api_v1_technicians_jobs__id__complete_patch": {
+        "properties": {
+          "remarks": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remarks"
+          }
+        },
+        "type": "object",
+        "title": "Body_complete_job_api_v1_technicians_jobs__id__complete_patch"
+      },
+      "Body_upload_document_or_image_api_v1_upload_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          },
+          "folder": {
+            "type": "string",
+            "title": "Folder",
+            "default": "homeserve/general"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_upload_document_or_image_api_v1_upload_post"
+      },
+      "BookingActionRequest": {
+        "properties": {
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "title": "BookingActionRequest"
+      },
+      "BookingAssignmentResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "technician_id": {
+            "type": "string",
+            "title": "Technician Id"
+          },
+          "assigned_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Assigned At"
+          },
+          "accepted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accepted At"
+          },
+          "arrival_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arrival Time"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          },
+          "technician_remarks": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Technician Remarks"
+          },
+          "technician": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TechnicianResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "booking_id",
+          "technician_id",
+          "assigned_at"
+        ],
+        "title": "BookingAssignmentResponse"
+      },
+      "BookingCreate": {
+        "properties": {
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "service_id": {
+            "type": "string",
+            "title": "Service Id"
+          },
+          "address_id": {
+            "type": "string",
+            "title": "Address Id"
+          },
+          "booking_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Booking Date"
+          },
+          "time_slot": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 3,
+            "title": "Time Slot"
+          },
+          "problem_description": {
+            "type": "string",
+            "minLength": 5,
+            "title": "Problem Description"
+          },
+          "coupon_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coupon Code"
+          },
+          "reference_image_urls": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Image Urls"
+          }
+        },
+        "type": "object",
+        "required": [
+          "provider_id",
+          "service_id",
+          "address_id",
+          "booking_date",
+          "time_slot",
+          "problem_description"
+        ],
+        "title": "BookingCreate"
+      },
+      "BookingImageResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          },
+          "image_type": {
+            "type": "string",
+            "title": "Image Type"
+          },
+          "uploaded_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Uploaded At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "booking_id",
+          "image_url",
+          "image_type",
+          "uploaded_at"
+        ],
+        "title": "BookingImageResponse"
+      },
+      "BookingResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "booking_reference": {
+            "type": "string",
+            "title": "Booking Reference"
+          },
+          "customer_id": {
+            "type": "string",
+            "title": "Customer Id"
+          },
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "service_id": {
+            "type": "string",
+            "title": "Service Id"
+          },
+          "address_id": {
+            "type": "string",
+            "title": "Address Id"
+          },
+          "booking_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Booking Date"
+          },
+          "time_slot": {
+            "type": "string",
+            "title": "Time Slot"
+          },
+          "problem_description": {
+            "type": "string",
+            "title": "Problem Description"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "cancellation_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancellation Reason"
+          },
+          "rejection_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejection Reason"
+          },
+          "base_amount": {
+            "type": "string",
+            "title": "Base Amount"
+          },
+          "discount_amount": {
+            "type": "string",
+            "title": "Discount Amount"
+          },
+          "platform_fee": {
+            "type": "string",
+            "title": "Platform Fee"
+          },
+          "final_amount": {
+            "type": "string",
+            "title": "Final Amount"
+          },
+          "payment_status": {
+            "type": "string",
+            "title": "Payment Status"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "service": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServiceResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provider": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServiceProviderResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AddressResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "assignments": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/BookingAssignmentResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assignments"
+          },
+          "images": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/BookingImageResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Images"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "booking_reference",
+          "customer_id",
+          "provider_id",
+          "service_id",
+          "address_id",
+          "booking_date",
+          "time_slot",
+          "problem_description",
+          "status",
+          "base_amount",
+          "discount_amount",
+          "platform_fee",
+          "final_amount",
+          "payment_status",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "BookingResponse"
+      },
+      "CategoryCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 2,
+            "title": "Name"
+          },
+          "slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slug"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "icon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "CategoryCreate"
+      },
+      "CategoryResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "icon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "slug",
+          "is_active",
+          "created_at"
+        ],
+        "title": "CategoryResponse"
+      },
+      "CategoryUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "icon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "title": "CategoryUpdate"
+      },
+      "ChangePasswordRequest": {
+        "properties": {
+          "current_password": {
+            "type": "string",
+            "title": "Current Password"
+          },
+          "new_password": {
+            "type": "string",
+            "minLength": 8,
+            "title": "New Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "current_password",
+          "new_password"
+        ],
+        "title": "ChangePasswordRequest"
+      },
+      "ComplaintCreate": {
+        "properties": {
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 3,
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 10,
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "booking_id",
+          "title",
+          "description"
+        ],
+        "title": "ComplaintCreate"
+      },
+      "ComplaintResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "customer_id": {
+            "type": "string",
+            "title": "Customer Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "admin_notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Admin Notes"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "booking_id",
+          "customer_id",
+          "title",
+          "description",
+          "status",
+          "created_at"
+        ],
+        "title": "ComplaintResponse"
+      },
+      "ComplaintStatusUpdate": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "admin_notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Admin Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ComplaintStatusUpdate"
+      },
+      "CouponCreate": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 3,
+            "title": "Code"
+          },
+          "discount_percent": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Percent"
+          },
+          "flat_discount": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flat Discount"
+          },
+          "min_order_amount": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Min Order Amount",
+            "default": "0.00"
+          },
+          "max_discount": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Discount"
+          },
+          "valid_until": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Valid Until"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "valid_until"
+        ],
+        "title": "CouponCreate"
+      },
+      "CouponResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "discount_percent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discount Percent"
+          },
+          "flat_discount": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flat Discount"
+          },
+          "min_order_amount": {
+            "type": "string",
+            "title": "Min Order Amount"
+          },
+          "max_discount": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Discount"
+          },
+          "valid_until": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Valid Until"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "min_order_amount",
+          "valid_until",
+          "is_active",
+          "created_at"
+        ],
+        "title": "CouponResponse"
+      },
+      "CouponValidateRequest": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "order_amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Order Amount"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "order_amount"
+        ],
+        "title": "CouponValidateRequest"
+      },
+      "CouponValidateResponse": {
+        "properties": {
+          "is_valid": {
+            "type": "boolean",
+            "title": "Is Valid"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "discount_amount": {
+            "type": "string",
+            "title": "Discount Amount"
+          },
+          "final_amount": {
+            "type": "string",
+            "title": "Final Amount"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "is_valid",
+          "code",
+          "discount_amount",
+          "final_amount",
+          "message"
+        ],
+        "title": "CouponValidateResponse"
+      },
+      "CreateOrderRequest": {
+        "properties": {
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "booking_id"
+        ],
+        "title": "CreateOrderRequest"
+      },
+      "CreateOrderResponse": {
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "key_id": {
+            "type": "string",
+            "title": "Key Id"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "booking_reference": {
+            "type": "string",
+            "title": "Booking Reference"
+          }
+        },
+        "type": "object",
+        "required": [
+          "order_id",
+          "amount",
+          "currency",
+          "key_id",
+          "booking_id",
+          "booking_reference"
+        ],
+        "title": "CreateOrderResponse"
+      },
+      "CustomerRegisterRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 15,
+            "minLength": 10,
+            "title": "Phone Number"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "title": "Password"
+          },
+          "full_name": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 2,
+            "title": "Full Name"
+          },
+          "emergency_contact": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Emergency Contact"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "phone_number",
+          "password",
+          "full_name"
+        ],
+        "title": "CustomerRegisterRequest"
+      },
+      "ForgotPasswordRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "title": "ForgotPasswordRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "InvoiceResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "invoice_number": {
+            "type": "string",
+            "title": "Invoice Number"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "subtotal": {
+            "type": "string",
+            "title": "Subtotal"
+          },
+          "tax_amount": {
+            "type": "string",
+            "title": "Tax Amount"
+          },
+          "discount": {
+            "type": "string",
+            "title": "Discount"
+          },
+          "total_amount": {
+            "type": "string",
+            "title": "Total Amount"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Issued At"
+          },
+          "booking": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BookingResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "invoice_number",
+          "booking_id",
+          "subtotal",
+          "tax_amount",
+          "discount",
+          "total_amount",
+          "issued_at"
+        ],
+        "title": "InvoiceResponse"
+      },
+      "LoginRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "LoginRequest"
+      },
+      "NotificationResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "is_read": {
+            "type": "boolean",
+            "title": "Is Read"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "title",
+          "message",
+          "type",
+          "is_read",
+          "created_at"
+        ],
+        "title": "NotificationResponse"
+      },
+      "PaymentResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "razorpay_order_id": {
+            "type": "string",
+            "title": "Razorpay Order Id"
+          },
+          "razorpay_payment_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Razorpay Payment Id"
+          },
+          "amount": {
+            "type": "string",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "booking_id",
+          "razorpay_order_id",
+          "amount",
+          "currency",
+          "status",
+          "created_at"
+        ],
+        "title": "PaymentResponse"
+      },
+      "ProviderEarningResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "gross_amount": {
+            "type": "string",
+            "title": "Gross Amount"
+          },
+          "platform_commission": {
+            "type": "string",
+            "title": "Platform Commission"
+          },
+          "net_earnings": {
+            "type": "string",
+            "title": "Net Earnings"
+          },
+          "payout_status": {
+            "type": "string",
+            "title": "Payout Status"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "provider_id",
+          "booking_id",
+          "gross_amount",
+          "platform_commission",
+          "net_earnings",
+          "payout_status",
+          "created_at"
+        ],
+        "title": "ProviderEarningResponse"
+      },
+      "ProviderRegisterRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 15,
+            "minLength": 10,
+            "title": "Phone Number"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "title": "Password"
+          },
+          "full_name": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 2,
+            "title": "Full Name"
+          },
+          "business_name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 2,
+            "title": "Business Name"
+          },
+          "business_address": {
+            "type": "string",
+            "minLength": 5,
+            "title": "Business Address"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "years_of_experience": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Years Of Experience",
+            "default": 1
+          },
+          "id_proof_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id Proof Url"
+          },
+          "license_doc_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Doc Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "phone_number",
+          "password",
+          "full_name",
+          "business_name",
+          "business_address"
+        ],
+        "title": "ProviderRegisterRequest"
+      },
+      "ProviderServiceCreate": {
+        "properties": {
+          "service_id": {
+            "type": "string",
+            "title": "Service Id"
+          },
+          "custom_price": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Custom Price"
+          },
+          "is_available": {
+            "type": "boolean",
+            "title": "Is Available",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "service_id",
+          "custom_price"
+        ],
+        "title": "ProviderServiceCreate"
+      },
+      "ProviderServiceResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "service_id": {
+            "type": "string",
+            "title": "Service Id"
+          },
+          "custom_price": {
+            "type": "string",
+            "title": "Custom Price"
+          },
+          "is_available": {
+            "type": "boolean",
+            "title": "Is Available"
+          },
+          "service": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServiceResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "provider_id",
+          "service_id",
+          "custom_price",
+          "is_available"
+        ],
+        "title": "ProviderServiceResponse"
+      },
+      "ProviderServiceUpdate": {
+        "properties": {
+          "custom_price": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Custom Price"
+          },
+          "is_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Available"
+          }
+        },
+        "type": "object",
+        "title": "ProviderServiceUpdate"
+      },
+      "ProviderVerifyRequest": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "rejection_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejection Reason"
+          }
+        },
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "title": "ProviderVerifyRequest"
+      },
+      "RefreshTokenRequest": {
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          }
+        },
+        "type": "object",
+        "required": [
+          "refresh_token"
+        ],
+        "title": "RefreshTokenRequest"
+      },
+      "ResetPasswordRequest": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "new_password": {
+            "type": "string",
+            "minLength": 8,
+            "title": "New Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "token",
+          "new_password"
+        ],
+        "title": "ResetPasswordRequest"
+      },
+      "ReviewCreate": {
+        "properties": {
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "rating": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Rating"
+          },
+          "comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Comment"
+          }
+        },
+        "type": "object",
+        "required": [
+          "booking_id",
+          "rating"
+        ],
+        "title": "ReviewCreate"
+      },
+      "ReviewReplyRequest": {
+        "properties": {
+          "reply": {
+            "type": "string",
+            "minLength": 2,
+            "title": "Reply"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reply"
+        ],
+        "title": "ReviewReplyRequest"
+      },
+      "ReviewResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "customer_id": {
+            "type": "string",
+            "title": "Customer Id"
+          },
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "rating": {
+            "type": "integer",
+            "title": "Rating"
+          },
+          "comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Comment"
+          },
+          "provider_reply": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Provider Reply"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "customer_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "booking_id",
+          "customer_id",
+          "provider_id",
+          "rating",
+          "created_at"
+        ],
+        "title": "ReviewResponse"
+      },
+      "ServiceAreaCreate": {
+        "properties": {
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "pincode": {
+            "type": "string",
+            "title": "Pincode"
+          }
+        },
+        "type": "object",
+        "required": [
+          "city",
+          "pincode"
+        ],
+        "title": "ServiceAreaCreate"
+      },
+      "ServiceAreaResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "pincode": {
+            "type": "string",
+            "title": "Pincode"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "provider_id",
+          "city",
+          "pincode",
+          "created_at"
+        ],
+        "title": "ServiceAreaResponse"
+      },
+      "ServiceCreate": {
+        "properties": {
+          "category_id": {
+            "type": "string",
+            "title": "Category Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 2,
+            "title": "Name"
+          },
+          "slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slug"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "base_price": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Base Price"
+          },
+          "estimated_duration_minutes": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Estimated Duration Minutes",
+            "default": 60
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category_id",
+          "name",
+          "description",
+          "base_price"
+        ],
+        "title": "ServiceCreate"
+      },
+      "ServiceProviderResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "business_name": {
+            "type": "string",
+            "title": "Business Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "business_address": {
+            "type": "string",
+            "title": "Business Address"
+          },
+          "years_of_experience": {
+            "type": "integer",
+            "title": "Years Of Experience"
+          },
+          "verification_status": {
+            "type": "string",
+            "title": "Verification Status"
+          },
+          "rejection_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejection Reason"
+          },
+          "id_proof_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id Proof Url"
+          },
+          "license_doc_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Doc Url"
+          },
+          "commission_rate": {
+            "type": "string",
+            "title": "Commission Rate"
+          },
+          "average_rating": {
+            "type": "string",
+            "title": "Average Rating"
+          },
+          "total_reviews": {
+            "type": "integer",
+            "title": "Total Reviews"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "service_areas": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ServiceAreaResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Service Areas"
+          },
+          "provider_services": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ProviderServiceResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Provider Services"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "business_name",
+          "business_address",
+          "years_of_experience",
+          "verification_status",
+          "commission_rate",
+          "average_rating",
+          "total_reviews",
+          "created_at"
+        ],
+        "title": "ServiceProviderResponse"
+      },
+      "ServiceResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "category_id": {
+            "type": "string",
+            "title": "Category Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "base_price": {
+            "type": "string",
+            "title": "Base Price"
+          },
+          "estimated_duration_minutes": {
+            "type": "integer",
+            "title": "Estimated Duration Minutes"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CategoryResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "category_id",
+          "name",
+          "slug",
+          "description",
+          "base_price",
+          "estimated_duration_minutes",
+          "is_active",
+          "created_at"
+        ],
+        "title": "ServiceResponse"
+      },
+      "ServiceUpdate": {
+        "properties": {
+          "category_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "base_price": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Price"
+          },
+          "estimated_duration_minutes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimated Duration Minutes"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "title": "ServiceUpdate"
+      },
+      "TechnicianAssignRequest": {
+        "properties": {
+          "technician_id": {
+            "type": "string",
+            "title": "Technician Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "technician_id"
+        ],
+        "title": "TechnicianAssignRequest"
+      },
+      "TechnicianCreateRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 15,
+            "minLength": 10,
+            "title": "Phone Number"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "title": "Password"
+          },
+          "full_name": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 2,
+            "title": "Full Name"
+          },
+          "specialization": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Specialization"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "phone_number",
+          "password",
+          "full_name"
+        ],
+        "title": "TechnicianCreateRequest"
+      },
+      "TechnicianResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "provider_id": {
+            "type": "string",
+            "title": "Provider Id"
+          },
+          "specialization": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Specialization"
+          },
+          "is_available": {
+            "type": "boolean",
+            "title": "Is Available"
+          },
+          "rating": {
+            "type": "string",
+            "title": "Rating"
+          },
+          "total_jobs_completed": {
+            "type": "integer",
+            "title": "Total Jobs Completed"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "provider_id",
+          "is_available",
+          "rating",
+          "total_jobs_completed",
+          "created_at"
+        ],
+        "title": "TechnicianResponse"
+      },
+      "TokenResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type",
+            "default": "bearer"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "user": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "User"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "refresh_token",
+          "role",
+          "user"
+        ],
+        "title": "TokenResponse"
+      },
+      "UserProfileUpdate": {
+        "properties": {
+          "full_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Full Name"
+          },
+          "phone_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone Number"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
+          }
+        },
+        "type": "object",
+        "title": "UserProfileUpdate"
+      },
+      "UserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "phone_number": {
+            "type": "string",
+            "title": "Phone Number"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "is_verified": {
+            "type": "boolean",
+            "title": "Is Verified"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "phone_number",
+          "full_name",
+          "role",
+          "is_active",
+          "is_verified",
+          "created_at"
+        ],
+        "title": "UserResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VerifyPaymentRequest": {
+        "properties": {
+          "booking_id": {
+            "type": "string",
+            "title": "Booking Id"
+          },
+          "razorpay_order_id": {
+            "type": "string",
+            "title": "Razorpay Order Id"
+          },
+          "razorpay_payment_id": {
+            "type": "string",
+            "title": "Razorpay Payment Id"
+          },
+          "razorpay_signature": {
+            "type": "string",
+            "title": "Razorpay Signature"
+          }
+        },
+        "type": "object",
+        "required": [
+          "booking_id",
+          "razorpay_order_id",
+          "razorpay_payment_id",
+          "razorpay_signature"
+        ],
+        "title": "VerifyPaymentRequest"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
