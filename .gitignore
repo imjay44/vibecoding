@@ -59,3 +59,8 @@ frontend/playwright-report/
 *.sqlite3
 *.db
 backend/app/uploads/
+
+# Netlify
+.netlify/
+.netlify
+
