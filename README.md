@@ -6,6 +6,7 @@
 [![MySQL](https://img.shields.io/badge/Database-MySQL%208.0%20%2F%20SQLAlchemy%202.x-4479A1.svg?logo=mysql&logoColor=white)](https://www.mysql.com)
 [![Playwright](https://img.shields.io/badge/E2E-Playwright%20Green-2EAD33.svg?logo=playwright&logoColor=white)](https://playwright.dev)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/imjay44/vibecoding&base=frontend)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/imjay44/vibecoding)
 [![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Commercial-blue.svg)](#license)
 
 **HomeServe Technologies** is an enterprise-grade, multi-role online marketplace SaaS platform connecting homeowners with vetted, insured, top-tier home service contractors and certified technicians. Designed from the ground up for resilience, speed, security, and responsive touch-first UX.
