@@ -22,6 +22,40 @@ def run_seed():
     db = SessionLocal()
 
     try:
+        # Ensure convenience aliases always exist even on pre-seeded databases
+        alias_users = [
+            ("customer@example.com", "+919876543299", "Customer@123456", "Verified Customer", "CUSTOMER"),
+            ("provider@apexhome.com", "+919811111119", "Provider@123456", "Apex Administrator", "SERVICE_PROVIDER"),
+            ("rajesh@apexhome.com", "+919844444449", "Tech@123456", "Rajesh Sharma", "TECHNICIAN"),
+        ]
+        for email, phone, pwd, name, role in alias_users:
+            if not db.query(User).filter(User.email == email).first():
+                u = User(
+                    email=email,
+                    phone_number=phone,
+                    hashed_password=get_password_hash(pwd),
+                    full_name=name,
+                    role=role,
+                    is_active=True,
+                    is_verified=True
+                )
+                db.add(u)
+                db.flush()
+                if role == "CUSTOMER":
+                    c = Customer(user_id=u.id)
+                    db.add(c)
+                    db.flush()
+                    db.add(Address(customer_id=c.id, title="Home", address_line1="702, Palm Beach Residency", city="Mumbai", state="Maharashtra", pincode="400021", is_default=True))
+                elif role == "SERVICE_PROVIDER":
+                    p = ServiceProvider(user_id=u.id, business_name="Apex Home Solutions", business_address="Shop 14, Commercial Center, Andheri West, Mumbai", years_of_experience=8, verification_status="APPROVED", commission_rate=Decimal("10.00"), average_rating=Decimal("4.85"), total_reviews=12)
+                    db.add(p)
+                elif role == "TECHNICIAN":
+                    p = db.query(ServiceProvider).first()
+                    if p:
+                        t = Technician(user_id=u.id, provider_id=p.id, specialization="Master Electrician", is_available=True, rating=Decimal("4.90"), total_jobs_completed=25)
+                        db.add(t)
+                db.commit()
+
         if db.query(ServiceCategory).first():
             print("[INFO] Database already contains seed data. Skipping re-seed.")
             return
@@ -59,12 +93,22 @@ def run_seed():
             is_active=True,
             is_verified=True
         )
-        db.add_all([customer_user1, customer_user2])
+        customer_user3 = User(
+            email="customer@example.com",
+            phone_number="+919876543212",
+            hashed_password=get_password_hash("Customer@123456"),
+            full_name="Verified Customer",
+            role="CUSTOMER",
+            is_active=True,
+            is_verified=True
+        )
+        db.add_all([customer_user1, customer_user2, customer_user3])
         db.flush()
 
         cust1 = Customer(user_id=customer_user1.id, emergency_contact="+919876543200")
         cust2 = Customer(user_id=customer_user2.id, emergency_contact="+919876543201")
-        db.add_all([cust1, cust2])
+        cust3 = Customer(user_id=customer_user3.id, emergency_contact="+919876543202")
+        db.add_all([cust1, cust2, cust3])
         db.flush()
 
         # Customer Addresses
@@ -90,7 +134,18 @@ def run_seed():
             pincode="400051",
             is_default=False
         )
-        db.add_all([addr1, addr2])
+        addr3 = Address(
+            customer_id=cust3.id,
+            title="Home",
+            address_line1="702, Palm Beach Residency",
+            address_line2="Marine Drive",
+            landmark="Near Nariman Point",
+            city="Mumbai",
+            state="Maharashtra",
+            pincode="400021",
+            is_default=True
+        )
+        db.add_all([addr1, addr2, addr3])
 
         # 3. Service Providers
         # Provider 1: Apex Home Solutions (Approved)
@@ -99,6 +154,15 @@ def run_seed():
             phone_number="+919811111111",
             hashed_password=get_password_hash("Provider@123456"),
             full_name="Rajesh Verma",
+            role="SERVICE_PROVIDER",
+            is_active=True,
+            is_verified=True
+        )
+        prov_user1_alias = User(
+            email="provider@apexhome.com",
+            phone_number="+919811111119",
+            hashed_password=get_password_hash("Provider@123456"),
+            full_name="Apex Administrator",
             role="SERVICE_PROVIDER",
             is_active=True,
             is_verified=True
@@ -123,12 +187,23 @@ def run_seed():
             is_active=True,
             is_verified=False
         )
-        db.add_all([prov_user1, prov_user2, prov_user3])
+        db.add_all([prov_user1, prov_user1_alias, prov_user2, prov_user3])
         db.flush()
 
         prov1 = ServiceProvider(
             user_id=prov_user1.id,
             business_name="Apex Home Solutions",
+            description="Premium certified technicians for all electrical, plumbing, and AC requirements with 8+ years experience.",
+            business_address="Shop 14, Commercial Center, Andheri West, Mumbai",
+            years_of_experience=8,
+            verification_status="APPROVED",
+            commission_rate=Decimal("10.00"),
+            average_rating=Decimal("4.85"),
+            total_reviews=12
+        )
+        prov1_alias = ServiceProvider(
+            user_id=prov_user1_alias.id,
+            business_name="Apex Home Solutions (Alias)",
             description="Premium certified technicians for all electrical, plumbing, and AC requirements with 8+ years experience.",
             business_address="Shop 14, Commercial Center, Andheri West, Mumbai",
             years_of_experience=8,
@@ -159,7 +234,7 @@ def run_seed():
             average_rating=Decimal("0.00"),
             total_reviews=0
         )
-        db.add_all([prov1, prov2, prov3])
+        db.add_all([prov1, prov1_alias, prov2, prov3])
         db.flush()
 
         # Provider Service Areas
@@ -198,6 +273,15 @@ def run_seed():
             is_active=True,
             is_verified=True
         )
+        tech_user1_alias = User(
+            email="rajesh@apexhome.com",
+            phone_number="+919844444449",
+            hashed_password=get_password_hash("Tech@123456"),
+            full_name="Rajesh Sharma",
+            role="TECHNICIAN",
+            is_active=True,
+            is_verified=True
+        )
         tech_user2 = User(
             email="suresh.tech@example.com",
             phone_number="+919844444442",
@@ -207,11 +291,19 @@ def run_seed():
             is_active=True,
             is_verified=True
         )
-        db.add_all([tech_user1, tech_user2])
+        db.add_all([tech_user1, tech_user1_alias, tech_user2])
         db.flush()
 
         tech1 = Technician(
             user_id=tech_user1.id,
+            provider_id=prov1.id,
+            specialization="Master Electrician & HVAC Specialist",
+            is_available=True,
+            rating=Decimal("4.90"),
+            total_jobs_completed=28
+        )
+        tech1_alias = Technician(
+            user_id=tech_user1_alias.id,
             provider_id=prov1.id,
             specialization="Master Electrician & HVAC Specialist",
             is_available=True,
@@ -226,7 +318,7 @@ def run_seed():
             rating=Decimal("4.75"),
             total_jobs_completed=19
         )
-        db.add_all([tech1, tech2])
+        db.add_all([tech1, tech1_alias, tech2])
         db.flush()
 
         print("[INFO] Seeding service catalog categories...")
