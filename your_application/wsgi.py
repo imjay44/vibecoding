@@ -12,3 +12,4 @@ if os.path.exists(backend_dir) and backend_dir not in sys.path:
 
 from app.main import app as application
 app = application
+
