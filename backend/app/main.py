@@ -18,6 +18,13 @@ async def lifespan(app: FastAPI):
     # Ensure database tables exist (useful for SQLite & fresh starts)
     Base.metadata.create_all(bind=engine)
     
+    # Auto-seed database if empty (ensures zero-config cloud deployment on Render)
+    try:
+        from app.db.seed import run_seed
+        run_seed()
+    except Exception as e:
+        print(f"[WARN] Auto-seed failed or skipped: {e}")
+
     # Ensure uploads directory exists
     uploads_dir = os.path.join(os.path.dirname(__file__), "uploads")
     os.makedirs(uploads_dir, exist_ok=True)
