@@ -85,3 +85,44 @@ All endpoints are prefixed with `/api/v1/`.
 - `GET /admin/coupons` – Manage discount coupons.
 - `POST /admin/coupons` – Create promotional coupon.
 - `GET /analytics/charts` – Monthly revenue, booking distribution, and customer growth trends.
+
+
+## 11. RAG AI Handbook & Policy Assistant (`/api/v1/chat`)
+
+Powered by LangChain and Google Gemini (`gemini-2.5-flash`), answering queries strictly using the HomeServe Company Handbook (`ragbased.pdf`) with static fallback handling for out-of-scope inquiries.
+
+- `POST /chat` or `POST /chat/ask` – Ask a question to the AI Assistant.
+  - **Request Body**:
+    ```json
+    {
+      "message": "What is the warranty period for plumbing and electrical work?",
+      "history": [
+        {"role": "user", "content": "Hello"},
+        {"role": "assistant", "content": "Hi! How can I assist you with company policies today?"}
+      ]
+    }
+    ```
+  - **In-Scope Response (HTTP 200)**:
+    ```json
+    {
+      "success": true,
+      "message": "Response generated successfully from company policies handbook",
+      "data": {
+        "reply": "All completed plumbing work is covered by a 30-day workmanship warranty from the date of the invoice. Parts warranty is as per manufacturer.",
+        "is_fallback": false,
+        "source": "ragbased.pdf"
+      }
+    }
+    ```
+  - **Out-of-Scope Response (HTTP 200)**:
+    ```json
+    {
+      "success": true,
+      "message": "Response generated successfully from company policies handbook",
+      "data": {
+        "reply": "I am sorry, but I can only answer questions related to the HomeServe company policies, services, warranties, and operating procedures covered in our official handbook. For other queries or customized assistance, please reach out to HomeServe Support at support@homeserve.com or call our helpline.",
+        "is_fallback": true,
+        "source": "ragbased.pdf"
+      }
+    }
+    ```

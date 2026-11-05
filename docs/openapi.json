@@ -3446,6 +3446,90 @@
         ]
       }
     },
+    "/api/v1/chat/ask": {
+      "post": {
+        "tags": [
+          "RAG AI Policy Assistant"
+        ],
+        "summary": "Chat With Handbook",
+        "description": "RAG Agent powered by LangChain and Google Gemini.\nAnswers queries strictly using the HomeServe Company Handbook (ragbased.pdf).\nProvides static fallback answer for any questions outside the handbook scope.",
+        "operationId": "chat_with_handbook_api_v1_chat_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ChatResponseData_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chat": {
+      "post": {
+        "tags": [
+          "RAG AI Policy Assistant"
+        ],
+        "summary": "Chat With Handbook",
+        "description": "RAG Agent powered by LangChain and Google Gemini.\nAnswers queries strictly using the HomeServe Company Handbook (ragbased.pdf).\nProvides static fallback answer for any questions outside the handbook scope.",
+        "operationId": "chat_with_handbook_api_v1_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ChatResponseData_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "summary": "Root",
@@ -3594,6 +3678,32 @@
         },
         "type": "object",
         "title": "APIResponse[CategoryResponse]"
+      },
+      "APIResponse_ChatResponseData_": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Operation completed successfully"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChatResponseData"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "APIResponse[ChatResponseData]"
       },
       "APIResponse_ComplaintResponse_": {
         "properties": {
@@ -5565,6 +5675,81 @@
           "new_password"
         ],
         "title": "ChangePasswordRequest"
+      },
+      "ChatMessage": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "description": "'user' or 'assistant'"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "Message text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "title": "ChatMessage"
+      },
+      "ChatRequest": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Message",
+            "description": "User's query"
+          },
+          "history": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ChatMessage"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "History",
+            "description": "Recent conversation turns",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "ChatRequest"
+      },
+      "ChatResponseData": {
+        "properties": {
+          "reply": {
+            "type": "string",
+            "title": "Reply"
+          },
+          "is_fallback": {
+            "type": "boolean",
+            "title": "Is Fallback"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "default": "ragbased.pdf"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reply",
+          "is_fallback"
+        ],
+        "title": "ChatResponseData"
       },
       "ComplaintCreate": {
         "properties": {

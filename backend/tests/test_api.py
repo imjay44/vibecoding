@@ -234,3 +234,25 @@ async def test_admin_stats_authorization():
         stats = stats_res.json()["data"]
         assert stats["total_customers"] >= 1
         assert stats["total_providers"] >= 1
+
+
+@pytest.mark.asyncio
+async def test_rag_chat_handbook_and_fallback():
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        # In-PDF Question
+        res_in = await client.post("/api/v1/chat", json={
+            "message": "What is the warranty period for plumbing?"
+        })
+        assert res_in.status_code == 200
+        data_in = res_in.json()["data"]
+        assert "30" in data_in["reply"] or "workmanship" in data_in["reply"].lower()
+        assert data_in["is_fallback"] is False
+
+        # Out-of-PDF Question (Guaranteed Static Fallback)
+        res_out = await client.post("/api/v1/chat", json={
+            "message": "What is the distance between the Earth and Mars?"
+        })
+        assert res_out.status_code == 200
+        data_out = res_out.json()["data"]
+        assert "only answer questions related to the HomeServe company policies" in data_out["reply"]
+        assert data_out["is_fallback"] is True

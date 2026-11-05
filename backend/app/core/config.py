@@ -32,6 +32,11 @@ class Settings(BaseSettings):
     CLOUDINARY_API_KEY: str = "123456789012345"
     CLOUDINARY_API_SECRET: str = "abcdefghijklmnopqrstuvwxyz1"
     
+    # AI & RAG Assistant (Loaded from .env / environment)
+    GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-2.5-flash"
+    RAG_PDF_PATH: str = "ragbased.pdf"
+    
     # Platform Defaults
     DEFAULT_PLATFORM_COMMISSION_PERCENT: float = 10.0
     

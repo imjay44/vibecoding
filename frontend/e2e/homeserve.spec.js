@@ -94,4 +94,37 @@ test.describe("HomeServe Technologies Full SaaS Platform E2E Suite", () => {
     const clientWidth = await page.evaluate(() => document.documentElement.clientWidth);
     expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 2);
   });
+
+  test("8. Floating RAG Chatbot (ragbased.pdf & Static Fallback)", async ({ page }) => {
+    test.setTimeout(45000);
+    await page.goto("/");
+
+    // 1. Check floating chatbot trigger is visible on bottom-right
+    const triggerBtn = page.locator("button[aria-label='Open HomeServe AI Policy Assistant']");
+    await expect(triggerBtn).toBeVisible();
+
+    // 2. Open Chatbot
+    await triggerBtn.click();
+    await expect(page.locator("text=HomeServe AI").first()).toBeVisible();
+    await expect(page.locator("text=ragbased.pdf").first()).toBeVisible();
+
+    // 3. Ask in-PDF question (Plumbing Warranty)
+    const chatInput = page.locator("input[placeholder='Ask about warranty, hours, cancellation...']");
+    await chatInput.fill("What is the warranty period for plumbing?");
+    await page.locator("button[title='Send message']").click();
+
+    // 4. Expect accurate policy response from PDF
+    await expect(page.locator("text=/30[- ]?days?|workmanship/i").first()).toBeVisible({ timeout: 20000 });
+
+    // 5. Ask out-of-PDF question (Static Fallback test)
+    await chatInput.fill("Who wrote the play Hamlet?");
+    await page.locator("button[title='Send message']").click();
+
+    // 6. Expect exact static fallback response
+    await expect(page.locator("text=I am sorry, but I can only answer questions related to the HomeServe company policies").first()).toBeVisible({ timeout: 15000 });
+
+    // 7. Close Chatbot
+    await page.locator("button[title='Close chat']").click();
+    await expect(page.locator("button[aria-label='Open HomeServe AI Policy Assistant']")).toBeVisible();
+  });
 });

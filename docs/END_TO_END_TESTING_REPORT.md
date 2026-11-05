@@ -15,10 +15,10 @@ A complete battery of automated end-to-end tests was executed across the fronten
 
 | Test Harness / Suite | Target Scope | Tests Executed | Passed | Failed | Duration | Pass Rate |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Playwright E2E Suite** | Live Chromium Browser Automations & Viewports | 7 | 7 | 0 | 12.9s | **100%** |
+| **Playwright E2E Suite** | Live Chromium Browser Automations & Viewports | 8 | 8 | 0 | 47.8s | **100%** |
 | **Live SaaS Lifecycle Test** | Complete 15-Stage Customer-to-Technician Workflow | 15 | 15 | 0 | 31.0s | **100%** |
-| **Pytest Integration Suite** | Backend Security, Hashing, Auth, Concurrency, RBAC | 9 | 9 | 0 | 2.7s | **100%** |
-| **Total Test Operations** | **Comprehensive Full-Stack Coverage** | **31** | **31** | **0** | **46.6s** | **100%** |
+| **Pytest Integration Suite** | Backend Security, Hashing, Auth, Concurrency, RBAC, RAG | 10 | 10 | 0 | 7.4s | **100%** |
+| **Total Test Operations** | **Comprehensive Full-Stack Coverage** | **33** | **33** | **0** | **86.2s** | **100%** |
 
 ---
 
@@ -27,17 +27,18 @@ A complete battery of automated end-to-end tests was executed across the fronten
 Each test runs in a real Chromium browser instance exercising DOM interactions, dynamic state updates, form submissions, and viewport sizing:
 
 ```text
-Running 7 tests using 1 worker
+Running 8 tests using 1 worker
 
-  ✓ 1 [chromium] › Public Homepage renders hero, dynamic categories, stats and footer (1.8s)
-  ✓ 2 [chromium] › Service Catalog browsing and keyword search (2.0s)
-  ✓ 3 [chromium] › Customer Authentication & Dashboard Access (1.8s)
-  ✓ 4 [chromium] › Service Provider Dashboard & Verification Status (1.7s)
-  ✓ 5 [chromium] › Technician Workforce Portal & Job Assignments (1.8s)
-  ✓ 6 [chromium] › Super Admin Governance Dashboard & KPIs (1.6s)
-  ✓ 7 [chromium] › Mobile Viewport Responsiveness without Horizontal Scroll (1.3s)
+  ✓ 1 [chromium] › Public Homepage renders hero, dynamic categories, stats and footer (1.9s)
+  ✓ 2 [chromium] › Service Catalog browsing and keyword search (1.9s)
+  ✓ 3 [chromium] › Customer Authentication & Dashboard Access (1.6s)
+  ✓ 4 [chromium] › Service Provider Dashboard & Verification Status (1.4s)
+  ✓ 5 [chromium] › Technician Workforce Portal & Job Assignments (1.5s)
+  ✓ 6 [chromium] › Super Admin Governance Dashboard & KPIs (1.9s)
+  ✓ 7 [chromium] › Mobile Viewport Responsiveness without Horizontal Scroll (1.2s)
+  ✓ 8 [chromium] › Floating RAG Chatbot (ragbased.pdf & Static Fallback) (35.4s)
 
-  7 passed (12.9s)
+  8 passed (47.8s)
 ```
 
 ### Detailed E2E Test Execution Breakdown
@@ -51,6 +52,7 @@ Running 7 tests using 1 worker
 | **E2E-05** | **Technician Workforce Portal**| Click Technician 1-click pill at `/login`, submit | Redirects to `/technician`, renders mobile-first dispatch queue with customer address details. | **PASS** |
 | **E2E-06** | **Super Admin Governance** | Click Super Admin 1-click pill at `/login`, submit | Redirects to `/admin`, renders executive analytics (Total Revenue Settled, Commission, User Directory). | **PASS** |
 | **E2E-07** | **Mobile Responsiveness** | Set viewport to 375x667 (iPhone SE), inspect layout | Hamburger navigation button visible; document `scrollWidth <= clientWidth` (zero horizontal overflow). | **PASS** |
+| **E2E-08** | **Floating RAG Chatbot** | Open floating widget, query in-pdf ("warranty"), query out-of-pdf ("Hamlet") | Receives 30-day warranty policy from `ragbased.pdf`; receives exact static fallback for out-of-pdf question. | **PASS** |
 
 ---
 
@@ -187,3 +189,4 @@ backend/tests/test_api.py::test_admin_stats_authorization PASSED         [100%]
 | **API Endpoints** | REST standards, 64 endpoints | Valid status codes (201, 200, 401, 403, 422) | **PASSED** |
 | **Database Operations** | 23 tables, ACID compliance | Automatic migrations & seed on startup | **PASSED** |
 | **Overall QA Assessment** | Production-ready SaaS platform | 31/31 automated tests passed (0 defects) | **APPROVED** |
+

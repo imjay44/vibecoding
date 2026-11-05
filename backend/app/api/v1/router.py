@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from app.api.v1.endpoints import (
     health, auth, categories, services, customers, providers,
     technicians, bookings, payments, invoices, reviews, complaints,
-    coupons, notifications, admin, analytics, upload
+    coupons, notifications, admin, analytics, upload, chat
 )
 
 api_router = APIRouter()
@@ -25,3 +25,4 @@ api_router.include_router(notifications.router, prefix="/notifications", tags=["
 api_router.include_router(admin.router, prefix="/admin", tags=["Super Admin"])
 api_router.include_router(analytics.router, prefix="/analytics", tags=["Platform Analytics"])
 api_router.include_router(upload.router, prefix="/upload", tags=["Media Upload"])
+api_router.include_router(chat.router, prefix="/chat", tags=["RAG AI Policy Assistant"])
