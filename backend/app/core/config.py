@@ -1,7 +1,13 @@
 import os
 from typing import List, Union
+from dotenv import load_dotenv
 from pydantic import AnyHttpUrl, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Load .env regardless of whether server is started from root or backend/
+for env_candidate in [".env", "backend/.env", os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env")]:
+    if os.path.exists(env_candidate):
+        load_dotenv(env_candidate)
 
 
 class Settings(BaseSettings):
