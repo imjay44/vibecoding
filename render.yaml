@@ -40,3 +40,7 @@ services:
         value: "123456789012345"
       - key: CLOUDINARY_API_SECRET
         value: sec_placeholder_1234567890
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: RAG_PDF_PATH
+        value: ragbased.pdf
